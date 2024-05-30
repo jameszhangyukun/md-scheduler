@@ -38,7 +38,7 @@ public class JobExecutor {
     private static List<AdminBiz> adminBizList;
 
     //内嵌的服务器对象
-    private EmbedServer embedServer = null;
+//    private EmbedServer embedServer = null;
 
     /**
      * 执行器启动
@@ -68,6 +68,10 @@ public class JobExecutor {
         }
     }
 
+
+    public static List<AdminBiz> getAdminBizList(){
+        return adminBizList;
+    }
 
 
 
