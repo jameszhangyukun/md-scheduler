@@ -1,0 +1,199 @@
+package com.md.scheduler.job.admin.core.model;
+
+import java.util.Date;
+
+/**
+ * 执行日志
+ */
+public class JobLog {
+    /**
+     * 日志id
+     */
+    private long id;
+    /**
+     * 日志组
+     */
+    private int jobGroup;
+    /**
+     * 任务id
+     */
+    private int jobId;
+    /**
+     * 执行器地址
+     */
+    private String executorAddress;
+    /**
+     * 定时任务的JobHandler名称
+     */
+    private String executorHandler;
+    /**
+     * 执行器参数
+     */
+    private String executorParam;
+    /**
+     * 执行器分片参数
+     */
+    private String executorShardingParam;
+    /**
+     * 失败重试次数
+     */
+    private int executorFailRetryCount;
+    /**
+     * 触发器触发时间
+     */
+    private Date triggerTIme;
+    /**
+     * 触发器触发时间
+     */
+    private int triggerTime;
+    /**
+     * 触发器任务的响应码
+     */
+    private int triggerCode;
+    /**
+     * 触发器任务的具体结果
+     */
+    private String triggerMsg;
+    /**
+     * 定时任务的执行时间
+     */
+    private Date handleTime;
+    /**
+     * 执行的响应码
+     */
+    private int handleCode;
+    /**
+     * 执行的具体结果
+     */
+    private String handleMsg;
+    //警报的状态码 0是默认，1是不需要报警，2是报警成功，3是报警失败
+    private int alarmStatus;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getJobGroup() {
+        return jobGroup;
+    }
+
+    public void setJobGroup(int jobGroup) {
+        this.jobGroup = jobGroup;
+    }
+
+    public int getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
+
+    public String getExecutorAddress() {
+        return executorAddress;
+    }
+
+    public void setExecutorAddress(String executorAddress) {
+        this.executorAddress = executorAddress;
+    }
+
+    public String getExecutorHandler() {
+        return executorHandler;
+    }
+
+    public void setExecutorHandler(String executorHandler) {
+        this.executorHandler = executorHandler;
+    }
+
+    public String getExecutorParam() {
+        return executorParam;
+    }
+
+    public void setExecutorParam(String executorParam) {
+        this.executorParam = executorParam;
+    }
+
+    public String getExecutorShardingParam() {
+        return executorShardingParam;
+    }
+
+    public void setExecutorShardingParam(String executorShardingParam) {
+        this.executorShardingParam = executorShardingParam;
+    }
+
+    public int getExecutorFailRetryCount() {
+        return executorFailRetryCount;
+    }
+
+    public void setExecutorFailRetryCount(int executorFailRetryCount) {
+        this.executorFailRetryCount = executorFailRetryCount;
+    }
+
+    public Date getTriggerTIme() {
+        return triggerTIme;
+    }
+
+    public void setTriggerTIme(Date triggerTIme) {
+        this.triggerTIme = triggerTIme;
+    }
+
+    public int getTriggerTime() {
+        return triggerTime;
+    }
+
+    public void setTriggerTime(int triggerTime) {
+        this.triggerTime = triggerTime;
+    }
+
+    public int getTriggerCode() {
+        return triggerCode;
+    }
+
+    public void setTriggerCode(int triggerCode) {
+        this.triggerCode = triggerCode;
+    }
+
+    public String getTriggerMsg() {
+        return triggerMsg;
+    }
+
+    public void setTriggerMsg(String triggerMsg) {
+        this.triggerMsg = triggerMsg;
+    }
+
+    public Date getHandleTime() {
+        return handleTime;
+    }
+
+    public void setHandleTime(Date handleTime) {
+        this.handleTime = handleTime;
+    }
+
+    public int getHandleCode() {
+        return handleCode;
+    }
+
+    public void setHandleCode(int handleCode) {
+        this.handleCode = handleCode;
+    }
+
+    public String getHandleMsg() {
+        return handleMsg;
+    }
+
+    public void setHandleMsg(String handleMsg) {
+        this.handleMsg = handleMsg;
+    }
+
+    public int getAlarmStatus() {
+        return alarmStatus;
+    }
+
+    public void setAlarmStatus(int alarmStatus) {
+        this.alarmStatus = alarmStatus;
+    }
+}

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="md-scheduler-core" />
+        <module name="md-scheduler-admin" />
       </profile>
     </annotationProcessing>
   </component>

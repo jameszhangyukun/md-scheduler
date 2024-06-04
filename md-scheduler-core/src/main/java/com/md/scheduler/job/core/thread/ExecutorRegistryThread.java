@@ -105,4 +105,19 @@ public class ExecutorRegistryThread {
         registryThread.setName("md-scheduler-registry-thread");
         registryThread.start();
     }
+
+    /**
+     * 终止注册线程
+     */
+    public void toStop() {
+        toStop = true;
+        if (registryThread != null) {
+            registryThread.interrupt();
+            try {
+                registryThread.join();
+            } catch (InterruptedException e) {
+                logger.error(e.getMessage(), e);
+            }
+        }
+    }
 }

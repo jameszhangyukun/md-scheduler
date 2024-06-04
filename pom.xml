@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>md-scheduler-core</module>
+        <module>md-scheduler-admin</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

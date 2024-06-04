@@ -21,7 +21,7 @@ public class JobThread extends Thread {
      */
     private int jobId;
     /**
-     *
+     * 定时任务方法的对象
      */
     private IJobHandler handler;
     /**
@@ -60,7 +60,7 @@ public class JobThread extends Thread {
      * 触发器参数放入队列
      */
     public ReturnT<String> pushTriggerQueue(TriggerParam triggerParam) {
-        triggerQueue.offer(triggerParam);
+        triggerQueue.add(triggerParam);
         return ReturnT.SUCCESS;
     }
 
@@ -93,7 +93,6 @@ public class JobThread extends Thread {
         }
         while (!toStop) {
             // 从队列中不断取出待执行的定时任务
-            // TODO
             running = false;
             idleTimes++;
             TriggerParam triggerParam = null;
@@ -108,7 +107,7 @@ public class JobThread extends Thread {
                     // 触发器中没有数据，没有需要执行的定时任务，长时间没有定时任务，直接移除空转线程
                     if (idleTimes > 30) {
                         if (triggerQueue.size() == 0) {
-                            // TODO JobExecutor 移除该线程
+                            JobExecutor.removeJobThread(jobId, "executor idle times over limit.");
                         }
                     }
                 }
@@ -119,7 +118,6 @@ public class JobThread extends Thread {
             }
         }
 
-        // TODO 停止后，回调结果给调度中心
         try {
             handler.destroy();
         } catch (Throwable e) {
