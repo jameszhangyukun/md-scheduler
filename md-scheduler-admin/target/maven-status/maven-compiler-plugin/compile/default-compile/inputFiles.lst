@@ -1,0 +1,14 @@
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobUserDao.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobUser.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobGroup.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobGroupDao.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobLogReportDao.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobRegistryDao.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobInfoDao.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobRegistry.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobLogDao.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobLogGlue.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobInfo.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobLog.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/core/model/JobLogReport.java
+/Users/zyk/dev/java/md-scheduler/md-scheduler-admin/src/main/java/com/md/scheduler/job/admin/dao/JobLogGlueDao.java

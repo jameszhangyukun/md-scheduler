@@ -68,12 +68,13 @@ public class JobRegistryHelper {
                 || !StringUtils.hasText(registryParam.getRegistryValue())) {
             return new ReturnT<String>(ReturnT.FAIL_CODE, "Illegal Argument.");
         }
-        registryOrRemoveThreadPool.execute(()->{
+        registryOrRemoveThreadPool.execute(() -> {
             //
             int save = JobAdminConfig.getAdminConfig().getXxlJobRegistryDao().registryUpdate(registryParam.getRegistryGroup(), registryParam.getRegistryKey(), registryParam.getRegistryValue(), new Date());
             if (save < 1) {
                 //数据库中没有相应数据，直接新增即可
-                JobAdminConfig.getAdminConfig().getXxlJobRegistryDao().registrySave(registryParam.getRegistryGroup(), registryParam.getRegistryKey(), registryParam.getRegistryValue(), new Date());
+                JobAdminConfig.getAdminConfig().getXxlJobRegistryDao().registrySave(
+                        registryParam.getRegistryGroup(), registryParam.getRegistryKey(), registryParam.getRegistryValue(), new Date());
                 //刷新注册表信息的
                 freshGroupRegistryInfo(registryParam);
             }
@@ -82,7 +83,25 @@ public class JobRegistryHelper {
         return ReturnT.SUCCESS;
     }
 
+    public ReturnT<String> registryRemove(RegistryParam registryParam) {
+        if (!StringUtils.hasText(registryParam.getRegistryGroup())
+                || !StringUtils.hasText(registryParam.getRegistryKey())
+                || !StringUtils.hasText(registryParam.getRegistryValue())) {
+            return new ReturnT<String>(ReturnT.FAIL_CODE, "Illegal Argument.");
+        }
+        registryOrRemoveThreadPool.execute(() -> {
+            int ret = JobAdminConfig.getAdminConfig().getXxlJobRegistryDao()
+                    .registryDelete(registryParam.getRegistryGroup(), registryParam.getRegistryKey(), registryParam.getRegistryValue());
 
+            if (ret > 0) {
+                freshGroupRegistryInfo(registryParam);
+            }
+        });
+        return ReturnT.SUCCESS;
+    }
+
+
+    // TODO
     private void freshGroupRegistryInfo(RegistryParam registryParam) {
     }
 }

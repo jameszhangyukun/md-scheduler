@@ -20,6 +20,14 @@ public class JobAdminConfig implements InitializingBean, DisposableBean {
     public static JobAdminConfig  getAdminConfig() {
         return jobAdminConfig;
     }
+
+    //快线程池的最大线程数
+    @Value("${xxl.job.triggerpool.fast.max}")
+    private int triggerPoolFastMax;
+
+    //慢线程池的最大线程数
+    @Value("${xxl.job.triggerpool.slow.max}")
+    private int triggerPoolSlowMax;
     @Value("${xxl.job.i18n}")
     private String i18n;
     @Resource
@@ -42,5 +50,19 @@ public class JobAdminConfig implements InitializingBean, DisposableBean {
     }
     public JobRegistryDao getXxlJobRegistryDao() {
         return jobRegistryDao;
+    }
+
+    public int getTriggerPoolFastMax() {
+        if (triggerPoolFastMax < 200) {
+            return 200;
+        }
+        return triggerPoolFastMax;
+    }
+
+    public int getTriggerPoolSlowMax() {
+        if (triggerPoolSlowMax < 100) {
+            return 100;
+        }
+        return triggerPoolSlowMax;
     }
 }
