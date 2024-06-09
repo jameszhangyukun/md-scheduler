@@ -1,6 +1,7 @@
 package com.md.scheduler.job.admin.core.thread;
 
 import com.md.scheduler.job.admin.core.conf.JobAdminConfig;
+import com.md.scheduler.job.admin.core.trigger.JobTrigger;
 import com.md.scheduler.job.admin.core.trigger.TriggerTypeEnum;
 import com.md.scheduler.job.core.biz.model.TriggerParam;
 import org.slf4j.Logger;
@@ -94,6 +95,8 @@ public class JobTriggerPoolHelper {
             long start = System.currentTimeMillis();
             try {
                 // 调用触发器执行任务 调用远程调用 TODO
+                JobTrigger.trigger(jobId, triggerTypeEnum, failRetryCount, executorShardingParma, executorParam, addressList);
+
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
             } finally {
@@ -118,14 +121,14 @@ public class JobTriggerPoolHelper {
     /**
      * 启动方法
      */
-    public static void doStart() {
+    public static void toStart() {
         helper.start();
     }
 
     /**
      * 停止方法
      */
-    public static void doStop() {
+    public static void toStop() {
         helper.stop();
     }
 
@@ -134,5 +137,6 @@ public class JobTriggerPoolHelper {
      */
     public static void trigger(int jobId, TriggerTypeEnum triggerType, int failRetryCount, String executorShardingParam,
                                String executorParam, String addressList) {
+        helper.addTrigger(jobId, triggerType, failRetryCount, executorShardingParam, executorParam, addressList);
     }
 }
