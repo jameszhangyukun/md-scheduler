@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="md-scheduler-core" />
         <module name="md-scheduler-admin" />
+        <module name="scheduler-demo" />
+        <module name="demo-executor-springboot" />
       </profile>
     </annotationProcessing>
   </component>

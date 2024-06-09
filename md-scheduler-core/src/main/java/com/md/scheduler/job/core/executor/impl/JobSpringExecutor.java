@@ -47,9 +47,14 @@ public class JobSpringExecutor extends JobExecutor implements ApplicationContext
             Object bean = applicationContext.getBean(beanDefinitionName);
             Map<Method, Job> annotatedMethods = null;
             try {
-                annotatedMethods =
-                        MethodIntrospector.selectMethods(bean.getClass(), (MethodIntrospector.MetadataLookup<Job>) method -> AnnotatedElementUtils.findMergedAnnotation(method, Job.class));
-            } catch (Throwable ex) {
+                annotatedMethods = MethodIntrospector.selectMethods(bean.getClass(),
+                        new MethodIntrospector.MetadataLookup<Job>() {
+                            @Override
+                            public Job inspect(Method method) {
+                                //在这里检查方法是否添加了@XxlJob注解
+                                return AnnotatedElementUtils.findMergedAnnotation(method, Job.class);
+                            }
+                        });  } catch (Throwable ex) {
                 logger.error("job method-jobhandler resolve error for bean[" + beanDefinitionName + "].", ex);
             }
             if (annotatedMethods == null || annotatedMethods.isEmpty()) {

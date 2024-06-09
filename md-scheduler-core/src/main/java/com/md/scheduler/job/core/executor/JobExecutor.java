@@ -27,7 +27,7 @@ public class JobExecutor {
     /**
      * 注册中心地址
      */
-    private String adminAddress;
+    private String adminAddresses;
     /**
      * token
      */
@@ -53,6 +53,30 @@ public class JobExecutor {
 
     private final static ConcurrentHashMap<String, IJobHandler> jobHandlerRepository = new ConcurrentHashMap<>();
     private static ConcurrentMap<Integer, JobThread> jobThreadRepository = new ConcurrentHashMap<Integer, JobThread>();
+    public void setAdminAddresses(String adminAddresses) {
+        this.adminAddresses = adminAddresses;
+    }
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+    public void setAppname(String appname) {
+        this.appname = appname;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+    public void setPort(int port) {
+        this.port = port;
+    }
+    public void setLogPath(String logPath) {
+        this.logPath = logPath;
+    }
+    public void setLogRetentionDays(int logRetentionDays) {
+        this.logRetentionDays = logRetentionDays;
+    }
 
     /**
      * 执行器启动
@@ -60,8 +84,8 @@ public class JobExecutor {
      * @throws Exception
      */
     public void start() throws Exception {
-        initAdminBizList(adminAddress, accessToken);
-        initEmbedServer(address, ip, port, appname, accessToken);
+        initAdminBizList(adminAddresses, accessToken);
+        initEmbedServer(adminAddresses, ip, port, appname, accessToken);
     }
 
     public void destroy() {
@@ -225,7 +249,7 @@ public class JobExecutor {
 
 
     public String getAdminAddress() {
-        return adminAddress;
+        return adminAddresses;
     }
 
     public String getAccessToken() {

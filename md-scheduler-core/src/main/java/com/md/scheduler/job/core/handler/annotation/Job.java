@@ -1,8 +1,13 @@
 package com.md.scheduler.job.core.handler.annotation;
 
+import java.lang.annotation.*;
+
 /**
  * Job注解
  */
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
 public @interface Job {
     /**
      * 任务名称
