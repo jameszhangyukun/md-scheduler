@@ -3,6 +3,7 @@ package com.md.scheduler.job.admin.core.trigger;
 import com.md.scheduler.job.admin.core.conf.JobAdminConfig;
 import com.md.scheduler.job.admin.core.model.JobGroup;
 import com.md.scheduler.job.admin.core.model.JobInfo;
+import com.md.scheduler.job.admin.core.route.ExecutorRouteStrategyEnum;
 import com.md.scheduler.job.admin.core.scheduler.JobScheduler;
 import com.md.scheduler.job.admin.core.util.I18nUtil;
 import com.md.scheduler.job.core.biz.ExecutorBiz;
@@ -46,7 +47,7 @@ public class JobTrigger {
         //第二点要强调的就是，XxlJobGroup这个对象，它并不是说里面有集合还是还是什么，在真正的生产环境中，一个定时任务不可能
         //只有一个服务器在执行吧，显然会有多个服务器在执行，对于相同的定时任务，注册到XXL-JOB的服务器上时，会把相同定时任务
         //的服务实例地址规整到一起，就赋值给XxlJobGroup这个类的addressList成员变量，不同的地址用逗号分隔即可
-        if (addressList != null && addressList.trim().length() > 0) {
+        if (addressList != null && !addressList.trim().isEmpty()) {
             //这里是设置执行器地址的注册方式，0是自动注册，就是1是用户手动注册的
             group.setAddressType(1);
             group.setAddressList(addressList.trim());
@@ -67,6 +68,9 @@ public class JobTrigger {
      */
     private static void processTrigger(JobGroup group, JobInfo jobInfo, int finalFailRetryCount, TriggerTypeEnum triggerType,
                                        int index, int total) {
+
+        ExecutorRouteStrategyEnum executorRouteStrategyEnum = ExecutorRouteStrategyEnum.match(jobInfo.getExecutorRouteStrategy(), null);
+
         TriggerParam triggerParam = new TriggerParam();
         triggerParam.setJobId(jobInfo.getId());
         triggerParam.setExecutorHandler(jobInfo.getExecutorHandler());
@@ -76,9 +80,14 @@ public class JobTrigger {
         String address = null;
         List<String> registryList = group.getRegistryList();
 
+        ReturnT<String> routeAddressResult = null;
         if (registryList != null && !registryList.isEmpty()) {
-            // TODO 需要使用路由策略进行处理，暂时没实现，先使用获取第0个执行地址
-            address = registryList.get(0);
+            routeAddressResult = executorRouteStrategyEnum.getExecutorRouter().route(triggerParam, registryList);
+            if (routeAddressResult.getCode() == ReturnT.SUCCESS_CODE) {
+                address = routeAddressResult.getContent();
+            } else {
+                routeAddressResult = new ReturnT<String>(ReturnT.FAIL_CODE, I18nUtil.getString("jobconf_trigger_address_empty"));
+            }
         }
 
         ReturnT<String> triggerResult = null;

@@ -1,6 +1,7 @@
 package com.md.scheduler.job.core.biz.client;
 
 import com.md.scheduler.job.core.biz.ExecutorBiz;
+import com.md.scheduler.job.core.biz.model.IdleBeatParam;
 import com.md.scheduler.job.core.biz.model.ReturnT;
 import com.md.scheduler.job.core.biz.model.TriggerParam;
 import com.md.scheduler.job.core.util.MdJobRemotingUtil;
@@ -31,5 +32,15 @@ public class ExecutorBizClient implements ExecutorBiz {
     @Override
     public ReturnT<String> run(TriggerParam triggerParam) {
         return MdJobRemotingUtil.postBody(addressUrl + "run", accessToken, timeout, triggerParam, String.class);
+    }
+
+    @Override
+    public ReturnT<String> idleBeat(IdleBeatParam idleBeatParam) {
+        return MdJobRemotingUtil.postBody(addressUrl + "idleBeat", accessToken, timeout, idleBeatParam, String.class);
+    }
+
+    @Override
+    public ReturnT<String> beat() {
+        return MdJobRemotingUtil.postBody(addressUrl + "beat", accessToken, timeout, "", String.class);
     }
 }

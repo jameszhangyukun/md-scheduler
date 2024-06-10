@@ -2,6 +2,7 @@ package com.md.scheduler.job.core.server;
 
 import com.md.scheduler.job.core.biz.ExecutorBiz;
 import com.md.scheduler.job.core.biz.impl.ExecutorBizImpl;
+import com.md.scheduler.job.core.biz.model.IdleBeatParam;
 import com.md.scheduler.job.core.biz.model.ReturnT;
 import com.md.scheduler.job.core.biz.model.TriggerParam;
 import com.md.scheduler.job.core.thread.ExecutorRegistryThread;
@@ -164,9 +165,17 @@ public class EmbedServer {
                     case "/run":
                         TriggerParam triggerParam = GsonTool.fromJson(requestData, TriggerParam.class);
                         return executorBiz.run(triggerParam);
+
+                    case "/idleBeat":
+                        //这里就是判断调度中心要调度的任务是否可以顺利执行，其实就是判断该任务是否正在被
+                        //执行器这一端执行或者在执行器的队列中，如果在的话，说明当前执行器比较繁忙
+                        IdleBeatParam idleBeatParam = GsonTool.fromJson(requestData, IdleBeatParam.class);
+                        return executorBiz.idleBeat(idleBeatParam);
+                    case "/beat":
+                        return executorBiz.beat();
                     default:
-                        return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping(" + url
-                                + ") not found.");
+                        return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping(" + uri + ") not found.");
+
                 }
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);

@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class ExecutorRouter {
     protected static Logger logger = LoggerFactory.getLogger(ExecutorRouter.class);
 
-    public abstract ReturnT<String>
-    route(TriggerParam triggerParam, List<String> addressList);
+    public abstract ReturnT<String> route(TriggerParam triggerParam, List<String> addressList);
+
 
 }

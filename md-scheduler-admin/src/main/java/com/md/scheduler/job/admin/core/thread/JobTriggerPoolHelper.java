@@ -94,7 +94,7 @@ public class JobTriggerPoolHelper {
         triggerPool.execute(() -> {
             long start = System.currentTimeMillis();
             try {
-                // 调用触发器执行任务 调用远程调用 TODO
+                // 调用触发器执行任务 调用远程调用
                 JobTrigger.trigger(jobId, triggerTypeEnum, failRetryCount, executorShardingParma, executorParam, addressList);
 
             } catch (Exception e) {

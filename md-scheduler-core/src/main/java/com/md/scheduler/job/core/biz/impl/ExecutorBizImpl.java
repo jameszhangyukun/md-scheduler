@@ -1,6 +1,7 @@
 package com.md.scheduler.job.core.biz.impl;
 
 import com.md.scheduler.job.core.biz.ExecutorBiz;
+import com.md.scheduler.job.core.biz.model.IdleBeatParam;
 import com.md.scheduler.job.core.biz.model.ReturnT;
 import com.md.scheduler.job.core.biz.model.TriggerParam;
 import com.md.scheduler.job.core.executor.JobExecutor;
@@ -62,5 +63,23 @@ public class ExecutorBizImpl implements ExecutorBiz {
         //等待线程去调用，返回一个结果
         ReturnT<String> pushResult = jobThread.pushTriggerQueue(triggerParam);
         return pushResult;
+    }
+
+    @Override
+    public ReturnT<String> idleBeat(IdleBeatParam idleBeatParam) {
+        boolean isRunningOrhasQueue = false;
+        JobThread jobThread = JobExecutor.loadJobThread(idleBeatParam.getJobId());
+        if (jobThread != null && jobThread.isRunningOrHasQueue()) {
+            isRunningOrhasQueue = true;
+        }
+        if (isRunningOrhasQueue) {
+            return new ReturnT<String>(ReturnT.FAIL_CODE, "job thread is running or has trigger queue.");
+        }
+        return ReturnT.SUCCESS;
+    }
+
+    @Override
+    public ReturnT<String> beat() {
+        return ReturnT.SUCCESS;
     }
 }
