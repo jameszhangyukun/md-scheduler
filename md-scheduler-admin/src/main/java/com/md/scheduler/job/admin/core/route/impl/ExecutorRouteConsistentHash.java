@@ -49,7 +49,7 @@ public class ExecutorRouteConsistentHash extends ExecutorRouter {
     /**
      * 将定时任务的哈希值和执行器地址的哈希值进行比较，获得距离地址任务id哈希值近的执行器地址就行
      */
-    public String hashJob(int jobId, List<String> addressList {
+    public String hashJob(int jobId, List<String> addressList) {
         TreeMap<Long, String> addressRing = new TreeMap<>();
 
         for (String address : addressList) {
