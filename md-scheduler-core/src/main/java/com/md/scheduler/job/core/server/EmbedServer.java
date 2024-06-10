@@ -174,7 +174,7 @@ public class EmbedServer {
                     case "/beat":
                         return executorBiz.beat();
                     default:
-                        return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping(" + uri + ") not found.");
+                        return new ReturnT<String>(ReturnT.FAIL_CODE, "invalid request, uri-mapping(" + url + ") not found.");
 
                 }
             } catch (Exception e) {
