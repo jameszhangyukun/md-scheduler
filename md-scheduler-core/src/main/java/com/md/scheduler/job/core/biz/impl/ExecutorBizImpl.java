@@ -1,15 +1,16 @@
 package com.md.scheduler.job.core.biz.impl;
 
 import com.md.scheduler.job.core.biz.ExecutorBiz;
-import com.md.scheduler.job.core.biz.model.IdleBeatParam;
-import com.md.scheduler.job.core.biz.model.ReturnT;
-import com.md.scheduler.job.core.biz.model.TriggerParam;
+import com.md.scheduler.job.core.biz.model.*;
 import com.md.scheduler.job.core.executor.JobExecutor;
 import com.md.scheduler.job.core.glue.GlueTypeEnum;
 import com.md.scheduler.job.core.handler.IJobHandler;
+import com.md.scheduler.job.core.log.XxlJobFileAppender;
 import com.md.scheduler.job.core.thread.JobThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Date;
 
 /**
  * 执行器进行定时调用
@@ -81,5 +82,18 @@ public class ExecutorBizImpl implements ExecutorBiz {
     @Override
     public ReturnT<String> beat() {
         return ReturnT.SUCCESS;
+    }
+
+    /**
+     * 注册中心远端获取日志
+     *
+     * @param logParam
+     * @return
+     */
+    @Override
+    public ReturnT<LogResult> log(LogParam logParam) {
+        String logFileName = XxlJobFileAppender.makeLogFileName(new Date(logParam.getLogDateTim()), logParam.getLogId());
+        LogResult logResult = XxlJobFileAppender.readLog(logFileName, logParam.getFromLineNum());
+        return new ReturnT<>(logResult);
     }
 }

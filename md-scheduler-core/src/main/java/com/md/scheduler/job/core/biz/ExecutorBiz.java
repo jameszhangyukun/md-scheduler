@@ -1,8 +1,6 @@
 package com.md.scheduler.job.core.biz;
 
-import com.md.scheduler.job.core.biz.model.IdleBeatParam;
-import com.md.scheduler.job.core.biz.model.ReturnT;
-import com.md.scheduler.job.core.biz.model.TriggerParam;
+import com.md.scheduler.job.core.biz.model.*;
 
 /**
  * 远程调用的客户端接口
@@ -15,4 +13,6 @@ public interface ExecutorBiz {
 
 
     ReturnT<String> beat();
+
+    ReturnT<LogResult> log(LogParam logParam);
 }

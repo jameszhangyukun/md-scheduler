@@ -16,9 +16,7 @@ public class JobContext {
     }
 
     public static final int HANDLE_CODE_SUCCESS = 200;
-
-    public static final int HANDLE_CODE_ERROR = 500;
-
+    public static final int HANDLE_CODE_FAIL = 500;
     public static final int HANDLE_CODE_TIMEOUT = 502;
     /**
      * 任务id

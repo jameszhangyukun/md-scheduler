@@ -7,6 +7,9 @@ import com.md.scheduler.job.core.handler.IJobHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
@@ -45,11 +48,14 @@ public class JobThread extends Thread {
      */
     private int idleTimes = 0;
 
+    private Set<Long> triggerLogIdSet;
+
     public JobThread(int jobId, IJobHandler handler) {
         this.jobId = jobId;
         this.handler = handler;
         this.triggerQueue = new LinkedBlockingDeque<>();
         this.setName("job jobThread-" + jobId + "-" + System.currentTimeMillis());
+        triggerLogIdSet = Collections.synchronizedSet(new HashSet<>());
     }
 
     public IJobHandler getJobHandler() {

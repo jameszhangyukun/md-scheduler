@@ -41,11 +41,7 @@ public class JobLog {
     /**
      * 触发器触发时间
      */
-    private Date triggerTIme;
-    /**
-     * 触发器触发时间
-     */
-    private int triggerTime;
+    private Date triggerTime;
     /**
      * 触发器任务的响应码
      */
@@ -133,19 +129,12 @@ public class JobLog {
         this.executorFailRetryCount = executorFailRetryCount;
     }
 
-    public Date getTriggerTIme() {
-        return triggerTIme;
-    }
 
-    public void setTriggerTIme(Date triggerTIme) {
-        this.triggerTIme = triggerTIme;
-    }
-
-    public int getTriggerTime() {
+    public Date getTriggerTime() {
         return triggerTime;
     }
 
-    public void setTriggerTime(int triggerTime) {
+    public void setTriggerTime(Date triggerTime) {
         this.triggerTime = triggerTime;
     }
 

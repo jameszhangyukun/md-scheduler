@@ -5,6 +5,7 @@ import com.md.scheduler.job.core.biz.client.AdminBizClient;
 import com.md.scheduler.job.core.handler.IJobHandler;
 import com.md.scheduler.job.core.handler.annotation.Job;
 import com.md.scheduler.job.core.handler.impl.MethodJobHandler;
+import com.md.scheduler.job.core.log.XxlJobFileAppender;
 import com.md.scheduler.job.core.server.EmbedServer;
 import com.md.scheduler.job.core.thread.JobThread;
 import com.md.scheduler.job.core.util.IpUtil;
@@ -84,6 +85,8 @@ public class JobExecutor {
      * @throws Exception
      */
     public void start() throws Exception {
+        //初始化日记收集组件，并且把用户设置的存储日记的路径设置到该组件中
+        XxlJobFileAppender.initLogPath(logPath);
         initAdminBizList(adminAddresses, accessToken);
         initEmbedServer(adminAddresses, ip, port, appname, accessToken);
     }
